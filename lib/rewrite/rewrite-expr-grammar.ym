@@ -106,8 +106,8 @@ rewrite_expr
             log_template_unref($3);
           }
           rewrite_expr_opts ')'                 { $$ = last_rewrite; }
-	| KW_SET_TAG '(' string ')'             { $$ = log_rewrite_set_tag_new($3, TRUE, configuration); free($3); }
-	| KW_CLEAR_TAG '(' string ')'           { $$ = log_rewrite_set_tag_new($3, FALSE, configuration); free($3); }
+	| KW_SET_TAG '(' string rewrite_condition_opt ')'             { $$ = log_rewrite_set_tag_new($3, TRUE, configuration); free($3); }
+	| KW_CLEAR_TAG '(' string rewrite_condition_opt ')'           { $$ = log_rewrite_set_tag_new($3, FALSE, configuration); free($3); }
         | KW_GROUP_SET '(' rewrite_template_content
         {
             last_rewrite = log_rewrite_groupset_new($3, configuration);
